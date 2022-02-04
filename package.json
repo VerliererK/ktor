@@ -1,0 +1,17 @@
+{
+  "name": "ktor",
+  "version": "1.0.0",
+  "description": "torrent server",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "author": "VerliererK",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "serve-index": "^1.9.1",
+    "webtorrent": "^1.7.2"
+  }
+}
