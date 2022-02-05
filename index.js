@@ -2,8 +2,8 @@ const os = require('os')
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
+const serveIndex = require("serve-index")
 const torrent = require('./routes/torrent')
-const serveIndex = require("serve-index");
 const port = parseInt(process.env.PORT, 10) || 3000
 const app = express()
 
@@ -17,6 +17,8 @@ fs.mkdir(DOWNLOAD_DIR, (err) => {
 })
 
 app.use("/downloads", express.static(DOWNLOAD_DIR), serveIndex(DOWNLOAD_DIR, { icons: true }))
+
+app.use(require('express-status-monitor')())
 
 app.use('/api/v1/torrent', torrent)
 
