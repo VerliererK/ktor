@@ -1,4 +1,5 @@
 const os = require('os')
+const fs = require('fs')
 const path = require('path')
 const utils = require('./utils')
 const WebTorrent = require('webtorrent')
@@ -51,9 +52,25 @@ exports.add = (req, res) => {
         })
         torrent.on('ready', () => {
             console.log(`torrent<${torrent.infoHash}> ready, path: ${torrent.path}`)
+            fs.unlink(path.join(torrent.path, 'files.txt'), function(err) {})
+            torrent.files.forEach((file) => {
+                file.on('done', () => {
+                    try {
+                        fs.appendFile(path.join(torrent.path, 'files.txt'), file.path + '\n', function (err) {
+                            if (err) {
+                                throw err
+                            }
+                        })
+                    }
+                    catch (e) {
+                        console.error(e)
+                    }
+                })
+            })
         })
         torrent.on('done', () => {
             console.log(`torrent<${torrent.infoHash}> done`)
+            torrent.pause()
         })
         torrent.on('error', (err) => {
             console.log(`torrent<${torrent.infoHash}> error: ${err}`)
