@@ -3,7 +3,18 @@ const fs = require('fs')
 const path = require('path')
 const utils = require('./utils')
 const WebTorrent = require('webtorrent')
-const client = new WebTorrent()
+const MAX_CONNS      = process.env.MAX_CONNS * 1 || 55
+const DOWNLOAD_LIMIT = process.env.DOWNLOAD_LIMIT * 1024 || 1*1024*1024 //1Mb
+const UPLOAD_LIMIT   = process.env.UPLOAD_LIMIT * 1024 || 1*1024        //1Kb
+const WEBSEEDS       = process.env.WEBSEEDS === 'true'
+const option = {
+    maxConns: MAX_CONNS,            // Max number of connections per torrent (default=55)
+    downloadLimit: DOWNLOAD_LIMIT,  // Max download speed (bytes/sec) over all torrents (default=-1)
+    uploadLimit: UPLOAD_LIMIT,      // Max upload speed (bytes/sec) over all torrents (default=-1)
+    webSeeds: WEBSEEDS,             // Enable BEP19 web seeds (default=true)
+}
+console.log(JSON.stringify(option))
+const client = new WebTorrent(option)
 
 const DOWNLOAD_DIR = path.join(os.tmpdir(), process.env.DOWNLOAD_DIR || 'downloads')
 
