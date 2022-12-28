@@ -4,7 +4,6 @@
   "description": "torrent server",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && npm install && npm run build",
     "start": "NODE_ENV=production node index.js"
   },
   "author": "VerliererK",
