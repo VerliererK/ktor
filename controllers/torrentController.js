@@ -47,7 +47,7 @@ exports.list = (req, res) => {
 }
 
 exports.add = (req, res) => {
-    const magnetURI = req.query.magnet
+    const magnetURI = decodeURIComponent(req.query.magnet)
     if (!magnetURI) {
         res.send({ error: true, errorMessage: 'Empty magnet' })
     } else if (magnetURI.indexOf('magnet:') !== 0) {

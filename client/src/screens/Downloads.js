@@ -18,7 +18,7 @@ function Downloads() {
       setAddingError("Link is not a magnet link");
     } else {
       setAddingError("");
-      const resp = await fetch(`/api/v1/torrent/add?magnet=${link}`);
+      const resp = await fetch(`/api/v1/torrent/add?magnet=${encodeURIComponent(link)}`);
 
       if (resp.status === 200) {
         setLink("");
