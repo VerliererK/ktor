@@ -1,4 +1,4 @@
-exports.toFormatedTime = (ms) => {
+export const toFormatedTime = (ms) => {
     let seconds = ms / 1000;
     let result = "";
     const days = Math.floor((seconds % 31536000) / 86400);
@@ -13,7 +13,7 @@ exports.toFormatedTime = (ms) => {
     return result;
 }
 
-exports.prettyBytes = (num) => {
+export const prettyBytes = (num) => {
     var exponent,
         unit,
         neg = num < 0,

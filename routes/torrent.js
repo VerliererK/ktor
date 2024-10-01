@@ -1,9 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const torrentController = require('../controllers/torrentController.js')
+import express from 'express';
+const router = express.Router();
+import { list, add, remove } from '../controllers/torrentController.js';
 
-router.get('/list', torrentController.list)
-router.get('/add', torrentController.add)
-router.get('/remove', torrentController.remove)
+router.get('/list', list);
+router.get('/add', add);
+router.get('/remove', remove);
 
-module.exports = router
+export default router;
