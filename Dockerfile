@@ -1,8 +1,11 @@
-FROM alpine:3.20.3
+FROM alpine:3.21
+
+ARG TARGETARCH
+ARG FILEBROWSER_VERSION=v2.61.2
 
 # 安裝必要的套件
 RUN apk add --no-cache nginx aria2 supervisor \
-    && wget -O - https://github.com/filebrowser/filebrowser/releases/download/v2.31.2/linux-amd64-filebrowser.tar.gz \
+    && wget -O - https://github.com/filebrowser/filebrowser/releases/download/${FILEBROWSER_VERSION}/linux-${TARGETARCH}-filebrowser.tar.gz \
     | tar -zxf - -C /usr/bin
 
 # 複製配置文件到相應目錄
