@@ -3,6 +3,8 @@ FROM alpine:3.21
 ARG TARGETARCH
 ARG FILEBROWSER_VERSION=v2.61.2
 
+RUN mkdir -p /downloads
+
 # 安裝必要的套件
 RUN apk add --no-cache nginx aria2 supervisor \
     && wget -O - https://github.com/filebrowser/filebrowser/releases/download/${FILEBROWSER_VERSION}/linux-${TARGETARCH}-filebrowser.tar.gz \
